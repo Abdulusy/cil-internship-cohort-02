@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REQUEST TO THE TODOS</title>
+</head>
+<body style="background-color: cadetblue;">
+    <form action="" id="form" method="post">
+        <input type="number" id="id" placeholder="id">
+        <input type="text" id="title" placeholder="title">
+        <input type="text" id="completed" placeholder="completed">
+        <input type="submit" value="Add todo">
+
+    </form>
+    <div id="result" style="background-color: burlywood;">
+
+    </div>
+    
+    <div id="putRequest" style="background-color: chocolate;"></div>
+    <div id="getRequest" style="padding-top: 50px; padding-left: 50px;">
+      <button onclick="request()">Get Request</button>
+    </div>
+    
+</body>
+<script>
+    let form = document.getElementById('form')
+    form.addEventListener('submit', function(e){
+      e.preventDefault()
+      let id =document.getElementById('id').value
+      let title =document.getElementById('title').value
+      let completed =document.getElementById('completed').value
+      
+      
+      fetch('https://jsonplaceholder.typicode.com/todos', {
+  method: 'POST',
+  body: JSON.stringify({
+    Id: id,
+    title: title,
+    completed: completed,
+   
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then(function (data) {
+    console.log(data)
+    let result = document.getElementById('result')
+    result.innerHTML= `<p> The id is ${data.id}</p>
+    <p>The Title is ${data.title}</p>
+    <p> Completed ${data.completed}</p>
+    `
+  });
+    
+    })
+
+    fetch('https://jsonplaceholder.typicode.com/todos/1', {
+  method: 'PUT',
+  body: JSON.stringify({
+    id: 1,
+    title: 'distinctio vitae autem nihil ut molestias quo',
+    completed: 'True',
+    
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then(function (data) {
+    console.log(data)
+    let putRequest = document.getElementById('putRequest')
+    putRequest.innerHTML= `<p> The new id is = ${data.id}</p>
+    <p>The new Title is = ${data.title}</p>
+    <p> New Completed is = ${data.completed}</p>
+    `
+
+  })
+   function request(){
+  fetch('https://jsonplaceholder.typicode.com/todos/7')
+  .then((response) => response.json())
+  .then(function (data) {
+    console.log(data)
+    let getRequest = document.getElementById('getRequest')
+    getRequest.innerHTML= `${data.id}
+    ${data.title}
+    ${data.completed}
+    `
+   })
+   }
+
+</script>
+</html>
