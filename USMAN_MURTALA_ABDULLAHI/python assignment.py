@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from cv2 import cv2
 from cv2 import INTER_AREA
 img = cv2.imread('jaf/mm.jpeg')
@@ -23,7 +23,7 @@ cv2.imwrite('resized_mm.jpg' , resized)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-=======
+
 import cv2
 from cv2 import INTER_AREA
 img = cv2.read("mm.jpg")
@@ -39,4 +39,4 @@ cv2.imwrite('resized_mm.jpg' , resized)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
->>>>>>> 9cfc0198cdd33977ff103d90ae4645c504a501e3
+
